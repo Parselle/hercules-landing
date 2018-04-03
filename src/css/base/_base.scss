@@ -7,10 +7,11 @@
 }
 
 .wrap {
-    max-width: rem(1140px);
+    max-width: rem(1170px);
     padding: 0 rem(15px);
     margin: 0 auto;
     text-align: center;
+    overflow: visible;
 }
 
 body > div {

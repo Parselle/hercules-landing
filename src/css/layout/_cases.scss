@@ -1,0 +1,17 @@
+
+.cases {
+
+    .wrap {
+        padding: rem(55px) 0;
+        padding-bottom: rem(100px);
+    }
+
+    &__title {
+        margin-bottom: rem(45px);
+    }
+
+    &__plates {
+        @include flex(row, space-around, flex-start);
+    }
+
+}

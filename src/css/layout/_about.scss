@@ -1,0 +1,32 @@
+
+.about {
+    .wrap {
+        @include flex(row, flex-end, flex-start);
+        padding-top: rem(35px);
+        padding-bottom: rem(100px);
+        background: url("../img/about-bg.png") left -55% top -40% no-repeat;
+        text-align: left;
+    }
+
+    &__article {
+        @include flex(column, flex-start, flex-start);
+        max-width: rem(585px);
+        margin-right: rem(100px);
+    }
+
+    &__title {
+        padding-left: rem(25px);
+    }
+
+    &__text {
+        padding: rem(30px) rem(35px);
+        margin-top: rem(80px);
+        box-shadow: $shadow-block;
+        text-transform: uppercase;
+
+        p:not(:nth-last-of-type(1)) {
+            margin-bottom: rem(25px);
+        }
+    }
+
+}

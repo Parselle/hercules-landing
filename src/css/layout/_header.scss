@@ -5,8 +5,53 @@
 .header {
 
     .wrap {
-        @include flex(row, space-between, center);
+        @include flex(column, flex-start, flex-start);
+        background: url("../img/header-bg.png") right top no-repeat;
+        padding-bottom: rem(170px);
+    }
+
+    &__top {
+        @include flex(row, flex-start, center);
+        width: 100%;
+        padding-top: rem(30px);
+        margin-bottom: 9.6%;
+    }
+
+    &__logo {
+        margin-right: rem(68px);
+    }
+
+    &__nav {
         
+        &::before {
+            content: "";
+            position: absolute;
+            margin-top: rem(6px);
+            width: rem(586px);
+            height: 5px;
+            background: $grey;
+            z-index: -1;
+        }
+
+        .nav__item {
+            padding: 0 rem(22px);
+            font-weight: 700;
+
+            &:hover {
+                color: darken($yellow, 5%);
+            }
+        }
+
+    }
+
+    &__content {
+        max-width: rem(405px);
+        margin-left: rem(67px);
+        text-align: left;
+
+        h1 {
+            margin-bottom: rem(68px);
+        }
     }
 
 }

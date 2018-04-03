@@ -179,20 +179,24 @@
 
     <div class="about">
         <div class="wrap">
-            <h1 class="about__title">О НАС</h1>
-            <p class="about__text">
-                Товарищи! консультация с широким активом в значительной степени
-                обуславливает создание систем массового участия. Таким образом сложившаяся
-                структура организации требуют от нас анализа существенных финансовых и
-                административных условий. Не следует, однако забывать, что постоянное
-                информационно- пропагандистское обеспечение нашей деятельности представляет
-                собой интересный эксперимент проверки позиций, занимаемых участниками
-                в отношении поставленных задач.
-            </p>
-            <p class="about__text">
-                Разнообразный и богатый опыт сложившаяся структура организации
-                обеспечивает широкому кругу (специалистов) 
-            </p>
+            <div class="about__article">
+                <h1 class="about__title">О НАС</h1>
+                <div class="about__text">
+                    <p>
+                        Товарищи! консультация с широким активом в значительной степени
+                        обуславливает создание систем массового участия. Таким образом сложившаяся
+                        структура организации требуют от нас анализа существенных финансовых и
+                        административных условий. Не следует, однако забывать, что постоянное
+                        информационно- пропагандистское обеспечение нашей деятельности представляет
+                        собой интересный эксперимент проверки позиций, занимаемых участниками
+                        в отношении поставленных задач.
+                    </p>
+                    <p>
+                        Разнообразный и богатый опыт сложившаяся структура организации
+                        обеспечивает широкому кругу (специалистов) участие в формировании новых предложений. 
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -253,8 +257,17 @@
             <div class="partners__plates">
                 <div class="plates__item">
                     <img src="img/partner.png" alt="" class="item__img">
+                </div>
+
+                <div class="plates__item">
                     <img src="img/partner.png" alt="" class="item__img">
+                </div>
+
+                <div class="plates__item">
                     <img src="img/partner.png" alt="" class="item__img">
+                </div>
+
+                <div class="plates__item">
                     <img src="img/partner.png" alt="" class="item__img">
                 </div>
             </div>
@@ -273,7 +286,7 @@
             </div>
 
             <form class="contacts__form c-form" action="" method="post" onsubmit="validateform(this); return false;">
-                <h2 class="form__title">
+                <h2 class="c-form__title">
                     ЕСТЬ ВОПРОСЫ?
                     <a href="#" class="c-link--blue">Можете их задать сейчас</a>
                 </h2>
@@ -292,7 +305,7 @@
                 <div class="c-form__block--grouped">
                     <div class="block__item">
                         <label for="height">Ваше сообщение</label>
-                        <input class="c-input" id="height" type="number" name="Lead[message]">
+                        <textarea class="c-input" id="height" type="number" name="Lead[message]" rows="3"></textarea>
                     </div>
                 </div>
 

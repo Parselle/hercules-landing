@@ -4,25 +4,19 @@
 
 
  body {
-    font-family: 'Roboto', 'Arial', 'Verdana', 'Tahoma', sans-serif; //Custom fonts must be first
+    font-family: 'Oswald', 'Arial', 'Verdana', 'Tahoma', sans-serif; //Custom fonts must be first
 }
 
 p {
     @include font-preset(rem(16px), normal, $black);
+    line-height: rem(24px);
 }
 
 h1 {
-    @include font-preset(rem(48px), 700, $black);
+    @include font-preset(rem(72px), 700, $black);
+    line-height: rem(85px);
 }
 
 h2 {
-    @include font-preset(rem(36px), 700, $black);
-}
-
-h3 {
-    @include font-preset(rem(30px), 700, $black);
-}
-
-h4 {
-    @include font-preset(rem(24px), normal, $black);
+    @include font-preset(rem(24px), 700, $black);
 }

@@ -5,16 +5,13 @@
 //Grouped form
 
 .c-form {
-    @include flex(column, flex-start, stretch);
+    @include flex(row, space-between, flex-start);
+    flex-wrap: wrap;
     width: 90%;
-    max-width: rem(420px);
-    padding: rem(30px);
+    max-width: rem(615px);
+    padding: rem(32px) rem(30px);
     padding-bottom: rem(40px);
-    margin-top: rem(20px);
-    background: white;
-    border-radius: rem(20px);
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+    background: $grey;
     //box-shadow: $shadow-form;
     
     @media screen and (max-width: 475px) {
@@ -24,9 +21,8 @@
     }
 
     &__title {
-        padding-bottom: rem(15px);
-        margin-bottom: rem(20px);
-        border-bottom: rem(1px) solid $grey-light;
+        margin-bottom: rem(30px);
+        //border-bottom: rem(1px) solid $grey-light;
 
         h4 {
             color: $orange;
@@ -51,14 +47,17 @@
 
     &__block {
         @include flex(column, flex-start, flex-start);
-        margin-bottom: rem(2px);
+        width: 47%;
+        margin-bottom: rem(10px);
 
         &--grouped {
             @include flex(row, space-between, flex-start);
+            width: 100%;
+            margin-bottom: rem(10px);
 
             .block__item {
                 @include flex(column, flex-start, flex-start);
-                max-width: 30%;
+                width: 100%;
             }
         }
 
@@ -68,9 +67,8 @@
 
 .c-input {
     width: 100%;
-    padding: rem(15px);
-    margin-bottom: rem(15px);
-    border: 1px solid $grey-dark;
+    padding: rem(18px);
+    border: 1px solid $black;
     @include font-preset(rem(16px), 400, $black);
     outline: none;
     transition: 0.2s;
@@ -81,58 +79,3 @@
         color: $black;
     }
 }
-
-//Not-grouped form
-
-/*
-.c-form {
-    @include flex(column, flex-start, center);
-    width: rem(466px);
-    height: rem(466px);
-    padding: rem(15px) rem(80px);
-    margin-top: rem(40px);
-    background: #c6ebbc;
-    border: 2px solid $orange;
-    border-radius: rem(500px);
-    z-index: 2;
-
-    &__img {
-        padding: rem(10px);
-        margin-top: rem(-40px);
-        background: $orange;
-        border-radius: 100px;
-    }
-
-    &__title {
-        padding: rem(8px) rem(10px);
-        padding-bottom: rem(20px);
-        line-height: rem(28px);
-    }
-
-    &__form {
-        @include flex(column, center, center);
-    }
-
-}
-
-.c-input {
-    //padding: rem(12px) rem(10px);
-    //border: 1px solid rgb(192, 191, 195);
-    //border-radius: rem(5px);
-    //background-color: rgb(255, 255, 255);
-    //@include font-preset(rem(24px), 400, $grey);
-    min-width: rem(292px);
-    padding: rem(18px) rem(35px);
-    margin-bottom: rem(15px);
-    border: 1px solid $input-grey;
-    border-radius: rem(30px);
-    @include font-preset(rem(16px), 400, $input-light-grey);
-    outline: none;
-    transition: 0.2s;
-
-    &:active,
-    &:focus {
-        color: $black;
-    }
-}
-*/

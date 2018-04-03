@@ -1,0 +1,33 @@
+
+.services {
+
+    .wrap {
+        padding: rem(40px) 0;
+        padding-bottom: rem(110px);
+    }
+
+    &__title {
+        margin-bottom: rem(50px);
+    }
+
+    &__plates {
+        @include flex(row, center, flex-start);
+        flex-wrap: wrap;
+        margin-bottom: rem(75px);
+
+        .plates__item {
+            @include flex(column, center, center);
+            width: rem(263px);
+            height: rem(80px);
+            margin: rem(14px);
+            margin-bottom: rem(20px);
+            border: rem(5px) solid $yellow;
+            
+            .item__text {
+                font-weight: 700;
+            }
+        }
+
+    }
+
+}
