@@ -1,0 +1,31 @@
+{
+  "name": "hercules-landing",
+  "version": "1.0.0",
+  "description": "hercules-landing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "parselledev@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "latest",
+    "browser-sync": "latest",
+    "gulp-clean": "latest",
+    "gulp-watch": "latest",
+    "gulp-rigger": "latest",
+    "gulp-sourcemaps": "latest",
+    "gulp-wait": "latest",
+    "gulp-htmlhint": "latest",
+    "gulp-htmlmin": "latest",
+    "gulp-sass": "latest",
+    "gulp-postcss": "latest",
+    "gulp-autoprefixer": "latest",
+    "css-mqpacker": "latest",
+    "gulp-csso": "latest",
+    "gulp-concat": "latest",
+    "gulp-uglifyes": "latest",
+    "gulp-imagemin": "latest",
+    "gulp-pngquant": "latest"
+  }
+}

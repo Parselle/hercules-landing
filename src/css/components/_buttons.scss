@@ -1,0 +1,20 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+.c-btn {
+    width: 90%;
+    padding: rem(15px) rem(38px);
+    outline: none;
+    border: rem(4px) solid white;
+    box-shadow: 0 0 0 5px $orange;
+    border-radius: rem(100px);
+    background-image: linear-gradient( to bottom, rgb(216,46,65) 0%, rgb(255,84,0) 100%);
+    @include font-preset(rem(24px), 700, white);
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 0 0 0 5px white;
+    }
+}

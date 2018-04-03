@@ -1,0 +1,28 @@
+// -----------------------------------------------------------------------------
+// This file contains basic typography styles.
+// -----------------------------------------------------------------------------
+
+
+ body {
+    font-family: 'Roboto', 'Arial', 'Verdana', 'Tahoma', sans-serif; //Custom fonts must be first
+}
+
+p {
+    @include font-preset(rem(16px), normal, $black);
+}
+
+h1 {
+    @include font-preset(rem(48px), 700, $black);
+}
+
+h2 {
+    @include font-preset(rem(36px), 700, $black);
+}
+
+h3 {
+    @include font-preset(rem(30px), 700, $black);
+}
+
+h4 {
+    @include font-preset(rem(24px), normal, $black);
+}

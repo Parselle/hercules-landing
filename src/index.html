@@ -1,0 +1,388 @@
+<!--
+<?php
+    session_start();
+    $landings_id = 1313;
+    $sessiondata = array();
+    if (!empty($_SESSION['l'.$landings_id])) {
+        $sessiondata = json_decode($_SESSION['l'.$landings_id],true);
+    }
+    if (!isset($sessiondata["click"])) {
+        $sessiondata["click"] = '';
+        $url = 'https://mosclubkrasota.ru/site/clicks/';
+        $postdata = $_GET;
+        $postdata['landings_id'] = $landings_id;
+        $postdata['ip'] = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        $postdata['referer'] = $_SERVER["HTTP_REFERER"];
+        $postdata['useragent'] = $_SERVER["HTTP_USER_AGENT"];
+        $postdata['refererlanding'] = "http://".$_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"];
+        $postdata['landingsscripts'] = true;
+        $postdata['citieslist'] = true;
+        $postdata['advertisersrequisites'] = true; // Для передачи на ленд набора реквизитов
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+        $sendingresult = curl_exec($ch);
+        $sendingerror = curl_error($ch);
+        if ( $sendingerror == "" && ($sendingresultjson = json_decode($sendingresult, true)) )
+        {
+            if (!empty($sendingresultjson["click"]))
+                $sessiondata["click"] = $sendingresultjson["click"];
+        
+            if (!empty($sendingresultjson["landingsscripts"]))
+                $sessiondata["landingsscripts"] = $sendingresultjson["landingsscripts"];
+        
+            if (!empty($sendingresultjson["citieslist"]))
+                $sessiondata["citieslist"] = $sendingresultjson["citieslist"];
+        
+    // Сохранение набора реквизитов 
+            if (!empty($sendingresultjson["advertisersrequisites"]))
+                $sessiondata["advertisersrequisites"] = $sendingresultjson["advertisersrequisites"];
+        }
+        $_SESSION['l'.$landings_id] = json_encode($sessiondata);
+    }
+    if (empty($_GET['city']) || empty($sessiondata["citieslist"][$_GET['city']])) {
+        include("/var/www/cpapartizan.ru/www/lib/SxGeo.php");
+        $SxGeo = new SxGeo('/var/www/cpapartizan.ru/www/lib/SxGeoCity.dat');
+        $SxGeoCity = $SxGeo->getCityFull($_SERVER['HTTP_X_REAL_IP']);
+        
+        foreach ($sessiondata["citieslist"] as $cityKey => $cityValue) {
+            if ($SxGeoCity["city"]["name_ru"] == $cityValue['case1']) {
+                $_GET['city'] = $cityKey;
+                break;
+            }
+        }
+    }
+    if (!empty($_GET['city']) && empty($sessiondata["citieslist"][$_GET['city']])) {
+        $_GET['city'] = '';
+    }
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        require_once("/var/www/cpapartizan.ru/www/lib/Lead.php");
+        
+        $sessiondata["leadflag"] = true;
+    //	if(!empty($_POST["Lead"]["name"]) && !empty($_POST["Lead"]["phone"])) {
+    //    	$sessiondata["friend"] = array(
+    //        	"friend" => $_POST["Lead"]["name"],
+    //        	"friend_phone" => $_POST["Lead"]["phone"],
+    //        	"friend_offer" => empty($_POST["Lead"]["offer"])?null:$_POST["Lead"]["offer"],
+    //        	"friend_city" => empty($_POST["Lead"]["city"])?null:$_POST["Lead"]["city"],
+    //        	"friend_landing" => $landings_id,
+    //    	);
+    //	}
+        
+        $_SESSION['l'.$landings_id] = json_encode($sessiondata);
+        
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+    }
+?>
+-->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/main.css">
+<link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+<script type="text/javascript" src="https://yastatic.net/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    if (typeof jQuery == 'undefined') {
+        document.write(unescape("%3Cscript src='/js/vendor/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
+    }
+</script>
+<script src="js/vendor/vendor.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<title>Simple title</title>
+<!--
+<?php echo empty($sessiondata["click"])?'':'<script src="https://mosclubkrasota.ru/site/clicks/?click='.$sessiondata["click"].'"></script>'; ?>
+<?=empty($sessiondata["landingsscripts"]["inhead"])?'':$sessiondata["landingsscripts"]["inhead"]?>
+-->
+</head>
+
+<body>
+
+    <!-- Hidden inputs -->
+        <!--
+        <input type="hidden" name="Lead[offer]" value="bormental">
+        <input class="cityInput" value="<?=$_GET['city']?>" name="Lead[city]" type="hidden">
+        <?php echo empty($sessiondata["click"])?'':'<input type="hidden" name="Lead[click]" value="'.$sessiondata["click"].'" />'; ?>
+        <input type="hidden" name="Lead[landing_id]" value="<?php echo $landings_id; ?>">
+        <input type="hidden" name="Lead[sub1]" value="<?php echo isset($_GET['sub1']) ? $_GET['sub1'] : ''; ?>">
+        <input type="hidden" name="Lead[sub2]" value="<?php echo isset($_GET['sub2']) ? $_GET['sub2'] : ''; ?>">
+        <input type="hidden" name="Lead[sub3]" value="<?php echo isset($_GET['sub3']) ? $_GET['sub3'] : ''; ?>">
+        <input type="hidden" name="Lead[sub4]" value="<?php echo isset($_GET['sub4']) ? $_GET['sub4'] : ''; ?>">
+        <input type="hidden" name="Lead[sub5]" value="<?php echo isset($_GET['sub5']) ? $_GET['sub5'] : ''; ?>">
+        <input type="hidden" name="Lead[wmkey]" value="<?php echo isset($_GET['wmkey']) ? $_GET['wmkey'] : ''; ?>">
+        <input type="hidden" name="urlreturn" value="false">
+        -->
+
+    <!-- Visual inputs (grouped) -->
+        <!--
+        <div class="c-form__block">
+            <label for="name">Ваше имя</label>
+            <input class="c-input" id="name" type="text" name="Lead[name]" placeholder="Алевтина">
+        </div>
+
+        <div class="c-form__block">
+            <label for="phone">Ваш телефон</label>
+            <input class="c-input" id="phone" type="tel" name="Lead[phone]" placeholder="8 123 456 78 90">
+        </div>
+
+        <div class="c-form__block--grouped">
+            <div class="block__item">
+                <label for="height">Ваш рост</label>
+                <input class="c-input" id="height" type="number" name="Lead[height]" placeholder="см">
+            </div>
+
+            <div class="block__item">
+                <label for="weight">Ваш вес</label>
+                <input class="c-input" id="weight" type="number" name="Lead[weight]" placeholder="кг">
+            </div>
+
+            <div class="block__item">
+                <label for="age">Ваш возраст</label>
+                <input class="c-input" id="age" type="number" name="Lead[age]" <?=($_GET['age']?' value="'.$_GET['age'].'"':'')?> placeholder="лет">
+            </div>
+        </div>
+
+        <input class="c-btn" type="submit" value="ЗАПИСАТЬСЯ">
+        -->
+
+    <!-- Visual inputs (not-grouped) -->
+        <!--
+        <input class="c-input" type="text" name="Lead[name]" placeholder="Ваше имя">
+        <input class="c-input" type="text" name="Lead[phone]" placeholder="Ваше телефон">
+        <input class="c-input" type="text" name="Lead[age]"<?=($_GET['age']?' value="'.$_GET['age'].'"':'')?> placeholder="Ваше возраст">
+        <input type="submit" class="c-btn" value="ЗАПИСАТЬСЯ">
+        -->
+
+    <header class="header">
+        <div class="wrap">
+            <div class="header__top">
+                <img src="img/logo.png" alt="" class="header__logo">
+                <nav class="header__nav">
+                    <a href="#" class="nav__item">Главная</a>
+                    <a href="#" class="nav__item">О нас</a>
+                    <a href="#" class="nav__item">Услуги</a>
+                    <a href="#" class="nav__item">Кейсы</a>
+                    <a href="#" class="nav__item">Партнеры</a>
+                    <a href="#" class="nav__item">Контакты</a>
+                </nav>
+            </div>
+            <div class="header__content">
+                <h1>ВСЕ ГРАНИ DIGITAL МАРКЕТИНГА</h1>
+                <a href="#" class="header__btn c-btn">ПОЛУЧИТЬ КЛИЕНТОВ</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="about">
+        <div class="wrap">
+            <h1 class="about__title">О НАС</h1>
+            <p class="about__text">
+                Товарищи! консультация с широким активом в значительной степени
+                обуславливает создание систем массового участия. Таким образом сложившаяся
+                структура организации требуют от нас анализа существенных финансовых и
+                административных условий. Не следует, однако забывать, что постоянное
+                информационно- пропагандистское обеспечение нашей деятельности представляет
+                собой интересный эксперимент проверки позиций, занимаемых участниками
+                в отношении поставленных задач.
+            </p>
+            <p class="about__text">
+                Разнообразный и богатый опыт сложившаяся структура организации
+                обеспечивает широкому кругу (специалистов) 
+            </p>
+        </div>
+    </div>
+
+    <div class="services">
+        <div class="wrap">
+            <h1 class="services__title">УСЛУГИ</h1>
+            <div class="services__plates">
+                <div class="plates__item">
+                    <p class="item__text">Баннерная реклама</p>
+                </div>
+
+                <div class="plates__item">
+                    <p class="item__text">Размещение</p>
+                </div>
+
+                <div class="plates__item">
+                    <p class="item__text">Брендирование</p>
+                </div>
+
+                <div class="plates__item">
+                    <p class="item__text">Спонсирование разделов и категорий</p>
+                </div>
+
+                <div class="plates__item">
+                    <p class="item__text">Нативная реклама</p>
+                </div>
+
+                <div class="plates__item">
+                    <p class="item__text">Репутационная</p>
+                </div>
+
+                <div class="plates__item">
+                    <p class="item__text">Продвижением в соц сетях и привлечение подписчиков</p>
+                </div>
+
+                <div class="plates__item">
+                    <p class="item__text">Статьи по здоровью на сайте</p>
+                </div>
+            </div>
+            <a href="#" class="services__btn c-btn">ПОЛУЧИТЬ КЛИЕНТОВ</a>
+        </div>
+    </div>
+
+    <div class="cases">
+        <div class="wrap">
+            <h1 class="cases__title">КЕЙСЫ</h1>
+            <div class="cases__plates">
+                <img src="img/case_1.png" alt="" class="plates__item">
+                <img src="img/case_2.png" alt="" class="plates__item">
+                <img src="img/case_3.png" alt="" class="plates__item">
+            </div>
+        </div>
+    </div>
+
+    <div class="partners">
+        <div class="wrap">
+            <h1 class="partners__title">ПАРТНЕРЫ</h1>
+            <div class="partners__plates">
+                <div class="plates__item">
+                    <img src="img/partner.png" alt="" class="item__img">
+                    <img src="img/partner.png" alt="" class="item__img">
+                    <img src="img/partner.png" alt="" class="item__img">
+                    <img src="img/partner.png" alt="" class="item__img">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contacts">
+        <div class="wrap">
+            <div class="contacts__info">
+                <h1 class="contacts__title">КОНТАКТЫ</h1>
+                <div class="contacts__block">
+                    <a class="c-link" href="tel:74991120777">+7 (499) 112-0-777</a>
+                    <a href="#" class="c-link">t.me/adamantmg</a>
+                    <a href="#" class="c-link">shtab@adamant.ru</a>
+                </div>
+            </div>
+
+            <form class="contacts__form c-form" action="" method="post" onsubmit="validateform(this); return false;">
+                <h2 class="form__title">
+                    ЕСТЬ ВОПРОСЫ?
+                    <a href="#" class="c-link--blue">Можете их задать сейчас</a>
+                </h2>
+
+                <!-- Visual inputs (grouped) -->
+                <div class="c-form__block">
+                    <label for="name">Ваше имя</label>
+                    <input class="c-input" id="name" type="text" name="Lead[name]">
+                </div>
+
+                <div class="c-form__block">
+                    <label for="phone">Ваш телефон</label>
+                    <input class="c-input" id="phone" type="tel" name="Lead[phone]">
+                </div>
+
+                <div class="c-form__block--grouped">
+                    <div class="block__item">
+                        <label for="height">Ваше сообщение</label>
+                        <input class="c-input" id="height" type="number" name="Lead[message]">
+                    </div>
+                </div>
+
+                <input class="c-btn" type="submit" value="НАПИСАТЬ">
+            </form>
+        </div>
+    </div>
+
+
+    <fotoer class="footer">
+        <!--<p>
+            
+            <?=empty($sessiondata["advertisersrequisites"])?'':((empty($_GET['city']) ||
+            empty($sessiondata["advertisersrequisites"][$_GET['city']]))?$sessiondata["advertisersrequisites"]
+            ['default']:$sessiondata["advertisersrequisites"][$_GET['city']])?>
+            
+        </p>-->
+        <a href="#" class="c-link">Политика конфиденциальности</a>
+        <a href="#" class="c-link">Пользовательское соглашение</a>
+        <a href="#" class="c-link">Согласие на обработку персональных данных</a>
+    </fotoer>
+
+    <!--
+    <script type="text/javascript">
+        function validateform(form)
+        {
+            var digits_reg = new RegExp("[^0-9]", "g");
+            form.elements["Lead[age]"].value = form.elements["Lead[age]"].value.replace(digits_reg, '');
+            if (form.elements["Lead[name]"].value == "") {
+                alert("Укажите Имя");
+                return false;
+            }
+            if (form.elements["Lead[name]"].value.length < 2) {
+                alert("Укажите Имя");
+                return false;
+            }
+        
+            if (form.elements["Lead[weight]"].value.length < 2){
+                alert("Укажите вес");
+                return false;
+            }
+    
+            if (form.elements["Lead[height]"].value == "") {
+                alert("Укажите Рост");
+                return false;
+            }
+            if (form.elements["Lead[phone]"].value == "") {
+                alert("Телефон не заполнен. Должен сождержать 10 цифр. Пример: 9123456789 или городской с кодом города 4951234567");
+                return false;
+            }
+            var phone_reg = new RegExp("[^0-9]", "g");
+            form.elements["Lead[phone]"].value = form.elements["Lead[phone]"].value.replace(phone_reg, '');
+            if (form.elements["Lead[phone]"].value.length < 10)
+            {
+                alert("Телефон не заполнен. Должен сождержать 10 цифр. Пример: 9123456789 или городской с кодом города 4951234567");
+                return false;
+            }
+            if (form.elements["Lead[phone]"].value.length > 11)
+            {
+                alert("Телефон не заполнен. Должен сождержать 10 цифр. Пример: 9123456789 или городской с кодом города 4951234567");
+                return false;
+            }
+            form.submit();
+        }
+    </script>
+
+    <?=empty($sessiondata["landingsscripts"]["inbody"])?'':$sessiondata["landingsscripts"]["inbody"]?>
+
+    <?php
+        if (($_SERVER['REQUEST_METHOD'] != 'POST') && isset($sessiondata["leadflag"])) {
+            unset($sessiondata["leadflag"]);
+            $_SESSION['l'.$landings_id] = json_encode($sessiondata);
+            
+            echo empty($sessiondata["landingsscripts"]["thankyoupage"])?'':$sessiondata["landingsscripts"]["thankyoupage"];
+            echo "<script>alert('Ваша заявка принята. Вскоре с вами свяжется оператор для уточнения деталей.');</script>";
+            
+            if (!empty($sessiondata["friend"])) {
+                $getparams = array_merge($_GET, $sessiondata["friend"]);
+                unset($sessiondata["friend"]);
+                $_SESSION['l'.$landings_id] = json_encode($sessiondata);
+            
+                if (!empty($_SERVER["HTTP_REFERER"])) {
+                    $getparams['refland'] = $_SERVER["HTTP_REFERER"];
+                }
+            
+                echo "<script>window.location.href=\"http://cpapartizan.ru/invitingtp/v1/".(empty($getparams) ? '' : '?'.http_build_query($getparams))."\";</script>";
+            }
+        } 
+    ?>
+    -->
+
+</body>
+</html>

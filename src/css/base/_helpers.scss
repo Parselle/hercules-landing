@@ -1,0 +1,27 @@
+// -----------------------------------------------------------------------------
+// This file contains CSS helper classes.
+// -----------------------------------------------------------------------------
+
+//Colors
+
+.green {
+    color: $green;
+}
+
+.orange {
+    color: $orange;
+}
+
+.throw {
+    text-decoration: line-through;
+}
+
+//Type
+
+.bold {
+    font-weight: 700;
+}
+
+.not-bold {
+    font-weight: normal;
+}
