@@ -2,8 +2,30 @@
 .services {
 
     .wrap {
+        position: relative;
         padding: rem(40px) 0;
-        padding-bottom: rem(110px);
+        padding-bottom: rem(75px);
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            width: rem(159px);
+            height: rem(430px);
+            background: url("../img/pattern.png");
+            z-index: -2;
+        }
+
+        &::before {
+            left: -5.5%;
+            top: 0;
+        }
+
+        &::after {
+            right: -5.5%;
+            bottom: 0;
+        }
+
     }
 
     &__title {
@@ -16,12 +38,17 @@
         margin-bottom: rem(75px);
 
         .plates__item {
+            position: relative;
             @include flex(column, center, center);
             width: rem(263px);
             height: rem(80px);
             margin: rem(14px);
             margin-bottom: rem(20px);
             border: rem(5px) solid $yellow;
+
+            &::before {
+                @include before-bg($yellow-white);
+            }
             
             .item__text {
                 font-weight: 700;

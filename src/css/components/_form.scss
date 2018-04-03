@@ -11,7 +11,7 @@
     max-width: rem(615px);
     padding: rem(32px) rem(30px);
     padding-bottom: rem(40px);
-    background: $grey;
+    background: url("../img/pattern.png");
     //box-shadow: $shadow-form;
     
     @media screen and (max-width: 475px) {
@@ -21,6 +21,7 @@
     }
 
     &__title {
+        width: 100%;
         margin-bottom: rem(30px);
         //border-bottom: rem(1px) solid $grey-light;
 

@@ -6,7 +6,7 @@
 
     .wrap {
         @include flex(column, flex-start, flex-start);
-        background: url("../img/header-bg.png") right top no-repeat;
+        background: url("../img/header-bg.png") right -13.3% top no-repeat;
         padding-bottom: rem(170px);
     }
 
@@ -14,7 +14,7 @@
         @include flex(row, flex-start, center);
         width: 100%;
         padding-top: rem(30px);
-        margin-bottom: 9.6%;
+        padding-bottom: 9.6%;
     }
 
     &__logo {

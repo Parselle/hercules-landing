@@ -11,7 +11,21 @@
     padding: 0 rem(15px);
     margin: 0 auto;
     text-align: center;
-    overflow: visible;
+}
+
+body {
+    background: url("../img/bg.png") center repeat-y;
+    
+    &::before { //Fix for body background position-y (padding top)
+        content: "";
+        width: 100%;
+        height: 180px;
+        background: #fff;
+        position: absolute;
+        top:0;
+        display: block;
+        z-index: -1;
+    }
 }
 
 body > div {

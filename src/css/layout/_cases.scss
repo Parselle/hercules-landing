@@ -3,7 +3,7 @@
 
     .wrap {
         padding: rem(55px) 0;
-        padding-bottom: rem(100px);
+        padding-bottom: rem(75px);
     }
 
     &__title {
@@ -12,6 +12,19 @@
 
     &__plates {
         @include flex(row, space-around, flex-start);
+        flex-wrap: wrap;
+
+        .plates__item {
+            position: relative;
+            width: rem(262px);
+            height: rem(262px);
+            box-shadow: $shadow-block;
+
+            &::before {
+                @include before-bg($yellow-light);
+            }
+        }
+
     }
 
 }

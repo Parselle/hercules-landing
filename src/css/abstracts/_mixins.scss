@@ -15,4 +15,13 @@
     color: $color
 }
 
-
+@mixin before-bg($color) { //For ::before element
+    content: "";
+    position: absolute;
+    right: rem(-12px);
+    bottom: rem(-12px);
+    width: 100%;
+    height: 100%;
+    background: $color;
+    z-index: -1;
+}

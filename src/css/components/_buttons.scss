@@ -9,6 +9,7 @@
     border: rem(5px) solid $blue;
     @include font-preset(rem(18px), 700, $blue);
     text-decoration: none;
+    background: white;
     cursor: pointer;
 
     &:hover {

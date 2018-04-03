@@ -3,7 +3,7 @@
 
     .wrap {
         @include flex(row, space-between, flex-start);
-        padding: rem(20px) 0;
+        padding-top: rem(20px);
     }
 
     &__info {

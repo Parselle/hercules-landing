@@ -3,9 +3,9 @@
 
     .wrap {
         @include flex(column, flex-start, center);
-        padding: rem(25px) 0;
+        padding: rem(75px) 0;
         padding-bottom: rem(75px);
-        background: url("../img/partners-bg.png") left 7% top -140% no-repeat;
+        background: url("../img/partners-bg.png") left 7% top no-repeat;
     }
 
     &__title {
@@ -13,6 +13,7 @@
     }
 
     &__plates {
+        position: relative;
         @include flex(row, center, flex-start);
         align-self: flex-end;
         flex-wrap: wrap;
@@ -20,12 +21,24 @@
         margin-bottom: rem(75px);
         margin-right: rem(165px);
 
+        &::before {
+            content: "";
+            position: absolute;
+            top: rem(-25px);
+            right: rem(-80px);
+            width: 193%;
+            height: 80%;
+            background: url("../img/pattern.png");
+            z-index: -1;
+        }
+
         .plates__item {
             @include flex(column, center, center);
             width: rem(226px);
             height: rem(75px);
             margin: rem(15px);
             margin-bottom: rem(15px);
+            background: white;
             box-shadow: $shadow-plate;
             
             .item__text {
