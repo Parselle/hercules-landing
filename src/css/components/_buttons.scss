@@ -3,14 +3,22 @@
 // -----------------------------------------------------------------------------
 
 .c-btn {
-    width: 100%;
-    padding: rem(22px) rem(73px);
-    outline: none;
+    width: 80%;
+    max-width: rem(322px);
+    padding: rem(22px) rem(5px);
     border: rem(5px) solid $blue;
     @include font-preset(rem(18px), 700, $blue);
     text-decoration: none;
+    text-align: center;
     background: white;
+    outline: none;
     cursor: pointer;
+
+    @media screen and (max-width: 570px) {
+        width: 100%;
+        padding: rem(15px) rem(5px);
+        text-align: center;
+    }
 
     &:hover {
         background: $blue;

@@ -1,0 +1,157 @@
+<div class="about">
+    <div class="wrap">
+        <div class="about__article">
+            <h1 class="about__title">О НАС</h1>
+            <div class="about__text">
+                <p>
+                    Товарищи! консультация с широким активом в значительной степени
+                    обуславливает создание систем массового участия. Таким образом сложившаяся
+                    структура организации требуют от нас анализа существенных финансовых и
+                    административных условий. Не следует, однако забывать, что постоянное
+                    информационно- пропагандистское обеспечение нашей деятельности представляет
+                    собой интересный эксперимент проверки позиций, занимаемых участниками
+                    в отношении поставленных задач.
+                </p>
+                <p>
+                    Разнообразный и богатый опыт сложившаяся структура организации
+                    обеспечивает широкому кругу (специалистов) участие в формировании новых предложений. 
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="services">
+    <div class="wrap">
+        <h1 class="services__title">УСЛУГИ</h1>
+        <div class="services__plates">
+            <div class="plates__item">
+                <p class="item__text">Баннерная реклама</p>
+            </div>
+
+            <div class="plates__item">
+                <p class="item__text">Размещение</p>
+            </div>
+
+            <div class="plates__item">
+                <p class="item__text">Брендирование</p>
+            </div>
+
+            <div class="plates__item">
+                <p class="item__text">Спонсирование разделов и категорий</p>
+            </div>
+
+            <div class="plates__item">
+                <p class="item__text">Нативная реклама</p>
+            </div>
+
+            <div class="plates__item">
+                <p class="item__text">Репутационная</p>
+            </div>
+
+            <div class="plates__item">
+                <p class="item__text">Продвижением в соц сетях и привлечение подписчиков</p>
+            </div>
+
+            <div class="plates__item">
+                <p class="item__text">Статьи по здоровью на сайте</p>
+            </div>
+        </div>
+        <a href="#" class="services__btn c-btn">ПОЛУЧИТЬ КЛИЕНТОВ</a>
+    </div>
+</div>
+
+<div class="cases">
+    <div class="wrap">
+        <h1 class="cases__title">КЕЙСЫ</h1>
+        <div class="cases__plates">
+            <div class="plates__item">
+                <img src="img/case_1.png" alt="">
+            </div>
+
+            <div class="plates__item">
+                <img src="img/case_2.png" alt="">
+            </div>
+
+            <div class="plates__item">
+                <img src="img/case_3.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="partners">
+    <div class="wrap">
+        <h1 class="partners__title">ПАРТНЕРЫ</h1>
+        <div class="partners__plates">
+            <div class="plates__item">
+                <img src="img/partner.png" alt="" class="item__img">
+            </div>
+
+            <div class="plates__item">
+                <img src="img/partner.png" alt="" class="item__img">
+            </div>
+
+            <div class="plates__item">
+                <img src="img/partner.png" alt="" class="item__img">
+            </div>
+
+            <div class="plates__item">
+                <img src="img/partner.png" alt="" class="item__img">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contacts">
+    <div class="wrap">
+        <div class="contacts__info">
+            <h1 class="contacts__title">КОНТАКТЫ</h1>
+            <div class="contacts__block">
+                <a class="c-link" href="tel:+74991120777">+7 (499) 112-0-777</a>
+                <a href="http://t.me/adamantmg" class="c-link">t.me/adamantmg</a>
+                <a href="mailto:shtab@adamant.ru" class="c-link">shtab@adamant.ru</a>
+            </div>
+        </div>
+
+        <form class="contacts__form c-form" action="" method="post" onsubmit="validateform(this); return false;">
+            <h2 class="c-form__title">
+                ЕСТЬ ВОПРОСЫ?
+                <span class="not-bold blue">МОЖЕТЕ ИХ ЗАДАТЬ СЕЙЧАС</span>
+            </h2>
+
+            <!-- Visual inputs (grouped) -->
+            <div class="c-form__block">
+                <label for="name">Ваше имя</label>
+                <input class="c-input" id="name" type="text" name="Lead[name]">
+            </div>
+
+            <div class="c-form__block">
+                <label for="phone">Ваш телефон</label>
+                <input class="c-input" id="phone" type="tel" name="Lead[phone]">
+            </div>
+
+            <div class="c-form__block--grouped">
+                <div class="block__item">
+                    <label for="height">Ваше сообщение</label>
+                    <textarea class="c-input" id="height" type="number" name="Lead[message]" rows="3"></textarea>
+                </div>
+            </div>
+
+            <input class="c-btn" type="submit" value="НАПИСАТЬ">
+        </form>
+    </div>
+</div>
+
+<fotoer class="footer">
+    <!--<p>
+        
+        <?=empty($sessiondata["advertisersrequisites"])?'':((empty($_GET['city']) ||
+        empty($sessiondata["advertisersrequisites"][$_GET['city']]))?$sessiondata["advertisersrequisites"]
+        ['default']:$sessiondata["advertisersrequisites"][$_GET['city']])?>
+        
+    </p>-->
+    <a href="#" class="c-link">Политика конфиденциальности</a>
+    <a href="#" class="c-link">Пользовательское соглашение</a>
+    <a href="#" class="c-link">Согласие на обработку персональных данных</a>
+</fotoer>

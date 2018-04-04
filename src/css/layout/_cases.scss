@@ -2,8 +2,13 @@
 .cases {
 
     .wrap {
-        padding: rem(55px) 0;
-        padding-bottom: rem(75px);
+        padding: rem(55px) rem(15px);
+        padding-bottom: rem(55px);
+
+        @media screen and (max-width: 570px) {
+            padding-top: rem(25px);
+            padding-bottom: rem(25px);
+        }
     }
 
     &__title {
@@ -18,6 +23,9 @@
             position: relative;
             width: rem(262px);
             height: rem(262px);
+            margin-bottom: rem(30px);
+            margin-right: rem(20px);
+            margin-left: rem(20px);
             box-shadow: $shadow-block;
 
             &::before {

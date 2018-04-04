@@ -11,10 +11,15 @@
     padding: 0 rem(15px);
     margin: 0 auto;
     text-align: center;
+    overflow: hidden;
 }
 
 body {
     background: url("../img/bg.png") center repeat-y;
+
+    @media screen and (max-width: 1170px) {
+        background-size: 90%;
+    }
     
     &::before { //Fix for body background position-y (padding top)
         content: "";

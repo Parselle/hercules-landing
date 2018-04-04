@@ -3,12 +3,29 @@
 
     .wrap {
         @include flex(row, space-between, flex-start);
+        flex-wrap: wrap;
         padding-top: rem(20px);
+
+        @media screen and (max-width: 1135px) {
+            @include flex(column, center, center);
+        }
+
+        @media screen and (max-width: 570px) {
+            padding-top: rem(25px);
+        }
     }
 
     &__info {
         @include flex(column, flex-start, flex-start);
-        padding: 0 rem(80px);
+        width: 100%;
+        max-width: rem(490px);
+        padding: 0 rem(65px);
+
+        @media screen and (max-width: 1135px) {
+            @include flex(column, center, center);
+            margin-bottom: rem(30px);
+            padding: 0;
+        }
     }
 
     &__title {
@@ -24,7 +41,8 @@
 
             &::before {
                 content: "";
-                padding: rem(1px) rem(32px);
+                padding: rem(1px) rem(15px);
+                margin-right: rem(15px);
             }
 
             &:nth-of-type(1) {

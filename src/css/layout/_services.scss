@@ -2,9 +2,18 @@
 .services {
 
     .wrap {
+        @include flex(column, center, center);
         position: relative;
         padding: rem(40px) 0;
         padding-bottom: rem(75px);
+
+        @media screen and (max-width: 948px) {
+            padding: rem(40px) rem(15px);
+        }
+
+        @media screen and (max-width: 570px) {
+            padding: rem(25px) rem(15px);
+        }
 
         &::before,
         &::after {
@@ -14,6 +23,10 @@
             height: rem(430px);
             background: url("../img/pattern.png");
             z-index: -2;
+
+            @media screen and (max-width: 1312px) {
+                display: none;
+            }
         }
 
         &::before {
@@ -29,13 +42,17 @@
     }
 
     &__title {
-        margin-bottom: rem(50px);
+        margin-bottom: rem(45px);
     }
 
     &__plates {
         @include flex(row, center, flex-start);
         flex-wrap: wrap;
-        margin-bottom: rem(75px);
+        margin-bottom: rem(45px);
+
+        @media screen and (max-width: 948px) {
+            margin-bottom: rem(25px);
+        }
 
         .plates__item {
             position: relative;
@@ -55,6 +72,10 @@
             }
         }
 
+    }
+
+    &__btn {
+        max-width: rem(320px);
     }
 
 }

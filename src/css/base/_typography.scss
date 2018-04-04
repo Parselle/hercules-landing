@@ -15,6 +15,11 @@ p {
 h1 {
     @include font-preset(rem(72px), 700, $black);
     line-height: rem(85px);
+
+    @media screen and (max-width: 570px) {
+        font-size: rem(48px);
+        line-height: rem(55px);
+    }
 }
 
 h2 {

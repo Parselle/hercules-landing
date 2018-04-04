@@ -7,50 +7,194 @@
     .wrap {
         @include flex(column, flex-start, flex-start);
         background: url("../img/header-bg.png") right -13.3% top no-repeat;
-        padding-bottom: rem(170px);
+        padding-bottom: rem(175px);
+
+        @media screen and (max-width: 768px) {
+            background: url("../img/header-bg.png") right 100% top no-repeat;
+            background-size: 120%;
+        }
+
+        @media screen and (max-width: 570px) {
+            @include flex(column, center, center);
+            padding-bottom: 10%;
+        }
     }
 
     &__top {
         @include flex(row, flex-start, center);
         width: 100%;
         padding-top: rem(30px);
-        padding-bottom: 9.6%;
+        padding-bottom: 9%;
+
+        @media screen and (max-width: 880px) {
+            justify-content: space-between;
+        }
+
+        @media screen and (max-width: 570px) {
+            padding-top: rem(25px);
+            padding-bottom:16%;
+        }
     }
 
     &__logo {
         margin-right: rem(68px);
+
+        @media screen and (max-width: 570px) {
+            width: 40%;
+        }
     }
 
     &__nav {
+        transition: 0.2s all;
+
+        @media screen and (max-width: 880px) {
+            display: none;
+        }
+
+        &.active {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            @include flex(column, center, center);
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 10;
+
+            &::before {
+                display: none
+            }
+
+            .nav__item {
+                margin: rem(10px) 0;
+            }
+
+        }
         
         &::before {
             content: "";
             position: absolute;
             margin-top: rem(6px);
-            width: rem(586px);
+            width: 60%;
+            max-width: rem(595px);
             height: 5px;
             background: $grey;
             z-index: -1;
         }
 
         .nav__item {
-            padding: 0 rem(22px);
+            margin: 0 rem(7px);
+            padding: rem(2px) rem(15px);
+            background: none;
             font-weight: 700;
 
             &:hover {
-                color: darken($yellow, 5%);
+                background: $yellow;
             }
         }
 
     }
 
+    //Hamburger
+    $bar-width: rem(30px);
+    $bar-height: rem(5px);
+    $bar-spacing: rem(10px);
+    $bar-border-radius: 0;
+    $container-height: $bar-height + $bar-spacing + $bar-spacing;
+
+    &__hamburger {
+        position: relative;
+        display: none;
+        width: $bar-width;
+        height: rem(37px);
+        cursor: pointer;
+        z-index: 10;
+
+        @media screen and (max-width: 880px) {
+            display: block;
+        }
+    
+        &.active {
+            position: fixed !important;
+            right: 15px;
+        }
+    
+        .hamburger__bar {
+            width: $bar-width;
+            height: $bar-height;
+            position: relative;
+            transform: translateY($bar-spacing);
+            background: $black;
+            border-radius: $bar-border-radius;
+            transition: all 0ms 300ms;
+    
+            &::after,
+            &::before {
+                width: $bar-width;
+                height: $bar-height;
+                border-radius: $bar-border-radius;
+            }
+    
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: $bar-spacing;
+                background: $black;
+                transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+            }
+    
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: $bar-spacing;
+                background: $black;
+                transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+            }
+    
+            &.animate {
+                background: rgba(255, 255, 255, 0); 
+    
+                &::before {
+                    bottom: 0;
+                    transform: rotate(-45deg);
+                    transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
+                }
+                
+                &::after {
+                    top: 0;
+                    transform: rotate(45deg);
+                    transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
+                }
+    
+            }
+        
+        }
+    
+    }
+
     &__content {
+        @include flex(column, flex-start, flex-start);
+        width: 90%;
         max-width: rem(405px);
         margin-left: rem(67px);
         text-align: left;
 
+        @media screen and (max-width: 570px) {
+            @include flex(column, center, center);
+            margin-left: 0;
+        }
+
         h1 {
+            width: 100%;
             margin-bottom: rem(68px);
+
+            @media screen and (max-width: 570px) {
+                margin-bottom: rem(28px);
+            }
         }
     }
 

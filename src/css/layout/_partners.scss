@@ -6,6 +6,25 @@
         padding: rem(75px) 0;
         padding-bottom: rem(75px);
         background: url("../img/partners-bg.png") left 7% top no-repeat;
+
+        @media screen and (max-width: 850px) {
+            @include flex(column, center, center);
+            background: url("../img/partners-bg.png") left 10% top rem(100px) no-repeat;
+        }
+
+        @media screen and (max-width: 700px) {
+            background: url("../img/partners-bg.png") left -20% top rem(100px) no-repeat;
+        }
+
+        @media screen and (max-width: 569px) {
+            background: url("../img/partners-bg.png") left rem(-80px) top rem(10px) no-repeat;
+            padding-top: rem(25px);
+            padding-bottom: rem(25px);
+        }
+
+        @media screen and (max-width: 440px) {
+            background: url("../img/partners-bg.png") left rem(-100px) top rem(20px) no-repeat;
+        }
     }
 
     &__title {
@@ -21,6 +40,11 @@
         margin-bottom: rem(75px);
         margin-right: rem(165px);
 
+        @media screen and (max-width: 850px) {
+            margin: 0;
+            align-self: auto;
+        }
+
         &::before {
             content: "";
             position: absolute;
@@ -30,6 +54,10 @@
             height: 80%;
             background: url("../img/pattern.png");
             z-index: -1;
+
+            @media screen and (max-width: 850px) {
+                display: none;
+            }
         }
 
         .plates__item {

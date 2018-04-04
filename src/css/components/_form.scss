@@ -7,7 +7,7 @@
 .c-form {
     @include flex(row, space-between, flex-start);
     flex-wrap: wrap;
-    width: 90%;
+    width: 110%;
     max-width: rem(615px);
     padding: rem(32px) rem(30px);
     padding-bottom: rem(40px);
@@ -15,7 +15,6 @@
     //box-shadow: $shadow-form;
     
     @media screen and (max-width: 475px) {
-        width: 90%;
         padding: rem(20px);
         padding-bottom: rem(40px);
     }
@@ -23,11 +22,11 @@
     &__title {
         width: 100%;
         margin-bottom: rem(30px);
-        //border-bottom: rem(1px) solid $grey-light;
+        line-height: rem(30px);
 
-        h4 {
-            color: $orange;
-            margin-bottom: rem(10px);
+        @media screen and (max-width: 1135px) {
+            padding: 0 15%;
+            margin-bottom: rem(20px);
         }
     }
 
@@ -42,14 +41,23 @@
     }
 
     input[type="submit"] {
-        margin: 0 auto;
+        max-width: 100%;
+        width: 100%;
         margin-top: rem(5px);
+    }
+
+    textarea {
+        resize: none;
     }
 
     &__block {
         @include flex(column, flex-start, flex-start);
         width: 47%;
         margin-bottom: rem(10px);
+        
+        @media screen and (max-width: 495px) {
+            width: 100%;
+        }
 
         &--grouped {
             @include flex(row, space-between, flex-start);
@@ -78,5 +86,6 @@
     &:active,
     &:focus {
         color: $black;
+        border-color: $blue;
     }
 }

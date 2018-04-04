@@ -1,0 +1,50 @@
+.c-modal {
+    position: fixed;
+    @include flex(column, center, center);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(38, 38, 38, 0.6);
+    z-index: 20;
+
+    .c-modal__box {
+        position: relative;
+        box-shadow: $shadow-block;
+        background: white url("../img/pattern.png");
+
+        form {
+            max-width: rem(290px);
+            padding: rem(20px) rem(15px);
+        }
+
+        .c-form__title {
+            text-align: center;
+        }
+
+        .c-form__block {
+            width: 100%;
+        }
+
+    }
+
+    .c-modal__close {
+        position: absolute;
+        top: -50px;
+        right: 0;
+        @include font-preset(rem(24px), 600, white);
+        background: $red;
+        padding: rem(3px) rem(10px) rem(4px) rem(10px);
+        border-radius: 50%;
+        transition: 0.2s;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.5; 
+        }
+
+    }
+
+}

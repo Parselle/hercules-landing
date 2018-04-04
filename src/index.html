@@ -157,27 +157,30 @@
         <input type="submit" class="c-btn" value="ЗАПИСАТЬСЯ">
         -->
 
-    <header class="header">
+    <header class="header" id="main">
         <div class="wrap">
             <div class="header__top">
                 <img src="img/logo.png" alt="" class="header__logo">
                 <nav class="header__nav">
-                    <a href="#" class="nav__item">Главная</a>
-                    <a href="#" class="nav__item">О нас</a>
-                    <a href="#" class="nav__item">Услуги</a>
-                    <a href="#" class="nav__item">Кейсы</a>
-                    <a href="#" class="nav__item">Партнеры</a>
-                    <a href="#" class="nav__item">Контакты</a>
+                    <a href="#main" class="nav__item">Главная</a>
+                    <a href="#about" class="nav__item">О нас</a>
+                    <a href="#services" class="nav__item">Услуги</a>
+                    <a href="#cases" class="nav__item">Кейсы</a>
+                    <a href="#partners" class="nav__item">Партнеры</a>
+                    <a href="#contacts" class="nav__item">Контакты</a>
                 </nav>
+                <div class="header__hamburger">
+                    <div class="hamburger__bar"></div>
+                </div>
             </div>
             <div class="header__content">
-                <h1>ВСЕ ГРАНИ DIGITAL МАРКЕТИНГА</h1>
-                <a href="#" class="header__btn c-btn">ПОЛУЧИТЬ КЛИЕНТОВ</a>
+                <h1>ВСЕ ГРАНИ<br> DIGITAL<br> МАРКЕТИНГА</h1>
+                <a href="#" class="header__btn c-btn" data-modal="client">ПОЛУЧИТЬ КЛИЕНТОВ</a>
             </div>
         </div>
     </header>
 
-    <div class="about">
+    <div class="about" id="about">
         <div class="wrap">
             <div class="about__article">
                 <h1 class="about__title">О НАС</h1>
@@ -200,58 +203,58 @@
         </div>
     </div>
 
-    <div class="services">
+    <div class="services" id="services">
         <div class="wrap">
             <h1 class="services__title">УСЛУГИ</h1>
             <div class="services__plates">
                 <div class="plates__item">
                     <p class="item__text">Баннерная реклама</p>
                 </div>
-
+    
                 <div class="plates__item">
-                    <p class="item__text">Размещение</p>
+                    <p class="item__text">Размещение статей/обзоров</p>
                 </div>
-
+    
                 <div class="plates__item">
                     <p class="item__text">Брендирование</p>
                 </div>
-
+    
                 <div class="plates__item">
                     <p class="item__text">Спонсирование разделов и категорий</p>
                 </div>
-
+    
                 <div class="plates__item">
                     <p class="item__text">Нативная реклама</p>
                 </div>
-
+    
                 <div class="plates__item">
                     <p class="item__text">Репутационная</p>
                 </div>
-
+    
                 <div class="plates__item">
                     <p class="item__text">Продвижением в соц сетях и привлечение подписчиков</p>
                 </div>
-
+    
                 <div class="plates__item">
                     <p class="item__text">Статьи по здоровью на сайте</p>
                 </div>
             </div>
-            <a href="#" class="services__btn c-btn">ПОЛУЧИТЬ КЛИЕНТОВ</a>
+            <a href="#" class="services__btn c-btn" data-modal="client">ПОЛУЧИТЬ КЛИЕНТОВ</a>
         </div>
     </div>
 
-    <div class="cases">
+    <div class="cases" id="cases">
         <div class="wrap">
             <h1 class="cases__title">КЕЙСЫ</h1>
             <div class="cases__plates">
                 <div class="plates__item">
                     <img src="img/case_1.png" alt="">
                 </div>
-
+    
                 <div class="plates__item">
                     <img src="img/case_2.png" alt="">
                 </div>
-
+    
                 <div class="plates__item">
                     <img src="img/case_3.png" alt="">
                 </div>
@@ -259,22 +262,22 @@
         </div>
     </div>
 
-    <div class="partners">
+    <div class="partners" id="partners">
         <div class="wrap">
             <h1 class="partners__title">ПАРТНЕРЫ</h1>
             <div class="partners__plates">
                 <div class="plates__item">
                     <img src="img/partner.png" alt="" class="item__img">
                 </div>
-
+    
                 <div class="plates__item">
                     <img src="img/partner.png" alt="" class="item__img">
                 </div>
-
+    
                 <div class="plates__item">
                     <img src="img/partner.png" alt="" class="item__img">
                 </div>
-
+    
                 <div class="plates__item">
                     <img src="img/partner.png" alt="" class="item__img">
                 </div>
@@ -282,7 +285,7 @@
         </div>
     </div>
 
-    <div class="contacts">
+    <div class="contacts" id="contacts">
         <div class="wrap">
             <div class="contacts__info">
                 <h1 class="contacts__title">КОНТАКТЫ</h1>
@@ -292,31 +295,31 @@
                     <a href="mailto:shtab@adamant.ru" class="c-link">shtab@adamant.ru</a>
                 </div>
             </div>
-
+    
             <form class="contacts__form c-form" action="" method="post" onsubmit="validateform(this); return false;">
                 <h2 class="c-form__title">
                     ЕСТЬ ВОПРОСЫ?
                     <span class="not-bold blue">МОЖЕТЕ ИХ ЗАДАТЬ СЕЙЧАС</span>
                 </h2>
-
+    
                 <!-- Visual inputs (grouped) -->
                 <div class="c-form__block">
                     <label for="name">Ваше имя</label>
                     <input class="c-input" id="name" type="text" name="Lead[name]">
                 </div>
-
+    
                 <div class="c-form__block">
                     <label for="phone">Ваш телефон</label>
                     <input class="c-input" id="phone" type="tel" name="Lead[phone]">
                 </div>
-
+    
                 <div class="c-form__block--grouped">
                     <div class="block__item">
                         <label for="height">Ваше сообщение</label>
-                        <textarea class="c-input" id="height" type="number" name="Lead[message]" rows="3"></textarea>
+                        <textarea class="c-input" id="height" type="text" name="Lead[message]" rows="3"></textarea>
                     </div>
                 </div>
-
+    
                 <input class="c-btn" type="submit" value="НАПИСАТЬ">
             </form>
         </div>
