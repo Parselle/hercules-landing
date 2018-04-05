@@ -4,8 +4,9 @@
 $( document ).ready(function() {
 
     class Menu {
-        constructor(hamburger, menu, link) {
+        constructor(hamburger, hamburger_bar, menu, link) {
             this.hamburger = hamburger;
+            this.hamburger_bar = hamburger_bar;
             this.menu = menu;
             this.link = link;
         }
@@ -13,8 +14,9 @@ $( document ).ready(function() {
         menu_control() {
             $(this.hamburger).on('click', () => {
                 $(this.hamburger).toggleClass("active");
-                $('.hamburger__bar').toggleClass('animate');
+                $(this.hamburger_bar).toggleClass('animate');
                 $(this.menu).toggleClass("active");
+                $('body').toggleClass("active"); //Turn off scroll
             });
 
             $(this.link).on("click", (e) => {
@@ -23,6 +25,8 @@ $( document ).ready(function() {
                 $(this.link).removeClass("active");
                 $(this.menu).removeClass("active");
                 $(this.hamburger).removeClass("active");
+                $(this.hamburger_bar).removeClass('animate')
+                $('body').removeClass("active");
                 
                 $('html, body').stop().animate({
                     scrollTop: ($(anchor.attr('href')).offset().top) -   parseInt($(topMenu.menu).height())
@@ -56,7 +60,7 @@ $( document ).ready(function() {
             <div class="c-modal">
                 <div class="c-modal__box">
                     <div class="c-modal__close">
-                        x
+                        <img src="img/close.svg">
                     </div>
                     <form class="contacts__form c-form" action="" method="post" onsubmit="validateform(this); return false;">`
 
@@ -86,16 +90,18 @@ $( document ).ready(function() {
 
     //Initialize
 
-    let topMenu = new Menu('.header__hamburger', '.header__nav', '.nav__item');
+    let topMenu = new Menu('.header__hamburger', '.hamburger__bar', '.header__nav', '.nav__item');
     topMenu.menu_control();
 
     $("body").on("click", (e) => {
         let target = $(e.target);
         if(target.attr("data-modal")) {
             modal.gen(target.attr("data-modal"));
+            $('body').addClass("active");
         }
         if(target.is(".c-modal__close")) {
             $(".c-modal").remove();
+            $('body').removeClass("active");
         }
     });
 

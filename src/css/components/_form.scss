@@ -11,7 +11,7 @@
     max-width: rem(615px);
     padding: rem(32px) rem(30px);
     padding-bottom: rem(40px);
-    background: url("../img/pattern.png");
+    background: $bg-pattern;
     //box-shadow: $shadow-form;
     
     @media screen and (max-width: 475px) {

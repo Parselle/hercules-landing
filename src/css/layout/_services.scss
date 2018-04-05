@@ -7,6 +7,10 @@
         padding: rem(40px) 0;
         padding-bottom: rem(75px);
 
+        @media screen and (max-width: 1320px) {
+            overflow: hidden;
+        }
+
         @media screen and (max-width: 948px) {
             padding: rem(40px) rem(15px);
         }
@@ -21,22 +25,27 @@
             position: absolute;
             width: rem(159px);
             height: rem(430px);
-            background: url("../img/pattern.png");
+            background: $bg-pattern;
             z-index: -2;
-
-            @media screen and (max-width: 1312px) {
-                display: none;
-            }
         }
 
         &::before {
             left: -5.5%;
             top: 0;
+
+            @media screen and (max-width: 500px) {
+                top: auto;
+                bottom: rem(-50px);
+            }
         }
 
         &::after {
             right: -5.5%;
             bottom: 0;
+
+            @media screen and (max-width: 500px) {
+                display: none;
+            }
         }
 
     }

@@ -5,6 +5,7 @@
         @include flex(row, space-between, flex-start);
         flex-wrap: wrap;
         padding-top: rem(20px);
+        overflow: hidden;
 
         @media screen and (max-width: 1135px) {
             @include flex(column, center, center);

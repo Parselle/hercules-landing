@@ -52,7 +52,7 @@
             right: rem(-80px);
             width: 193%;
             height: 80%;
-            background: url("../img/pattern.png");
+            background: $bg-pattern;
             z-index: -1;
 
             @media screen and (max-width: 850px) {

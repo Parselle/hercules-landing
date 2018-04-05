@@ -16,12 +16,23 @@
         background: white url("../img/pattern.png");
 
         form {
-            max-width: rem(290px);
-            padding: rem(20px) rem(15px);
+            max-width: rem(457px);
+            padding: rem(37px) rem(67px);
+
+            @media screen and (max-width: 475px) {
+                max-width: rem(290px);
+                padding: rem(20px) rem(15px);
+            }
         }
 
         .c-form__title {
             text-align: center;
+            width: 100%;
+            
+            @media screen and (max-width: 1135px) {
+                padding: 0;
+                margin-bottom: rem(20px);
+            }
         }
 
         .c-form__block {
@@ -35,14 +46,16 @@
         top: -50px;
         right: 0;
         @include font-preset(rem(24px), 600, white);
-        background: $red;
-        padding: rem(3px) rem(10px) rem(4px) rem(10px);
-        border-radius: 50%;
         transition: 0.2s;
+        opacity: 0.4;
         cursor: pointer;
 
+        img {
+            pointer-events: none;
+        }
+
         &:hover {
-            opacity: 0.5; 
+            opacity: 1; 
         }
 
     }
