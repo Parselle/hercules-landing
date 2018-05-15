@@ -20,17 +20,51 @@
         flex-wrap: wrap;
 
         .plates__item {
+            @include flex(column, center, center);
             position: relative;
-            width: rem(262px);
-            height: rem(262px);
+            width: rem(300px);
+            height: rem(300px);
             margin-bottom: rem(30px);
             margin-right: rem(20px);
             margin-left: rem(20px);
             box-shadow: $shadow-block;
+            background: $yellow;
+
+            img {
+                pointer-events: none;
+            }
+
+            &:hover {
+                .item__content {
+                    opacity: 1;
+                }
+            }
 
             &::before {
                 @include before-bg($yellow-light);
             }
+        }
+
+        .item__content {
+            position: absolute;
+            top: rem(5px);
+            left: rem(5px);
+            @include flex(column, flex-start, flex-start);
+            width: rem(290px);
+            height: rem(290px);
+            padding: rem(20px);
+            background: $yellow;
+            border: 5px solid white;
+            text-align: left;
+            opacity: 0;
+        }
+
+        .item__title {
+            margin-bottom: rem(15px);
+        }
+
+        .item__text:not(:nth-last-of-type(1)) {
+            margin-bottom: rem(15px);
         }
 
     }

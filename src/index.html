@@ -1,83 +1,4 @@
-<!--
-<?php
-    session_start();
-    $landings_id = 1313;
-    $sessiondata = array();
-    if (!empty($_SESSION['l'.$landings_id])) {
-        $sessiondata = json_decode($_SESSION['l'.$landings_id],true);
-    }
-    if (!isset($sessiondata["click"])) {
-        $sessiondata["click"] = '';
-        $url = 'https://mosclubkrasota.ru/site/clicks/';
-        $postdata = $_GET;
-        $postdata['landings_id'] = $landings_id;
-        $postdata['ip'] = $_SERVER["HTTP_X_FORWARDED_FOR"];
-        $postdata['referer'] = $_SERVER["HTTP_REFERER"];
-        $postdata['useragent'] = $_SERVER["HTTP_USER_AGENT"];
-        $postdata['refererlanding'] = "http://".$_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"];
-        $postdata['landingsscripts'] = true;
-        $postdata['citieslist'] = true;
-        $postdata['advertisersrequisites'] = true; // Для передачи на ленд набора реквизитов
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-        $sendingresult = curl_exec($ch);
-        $sendingerror = curl_error($ch);
-        if ( $sendingerror == "" && ($sendingresultjson = json_decode($sendingresult, true)) )
-        {
-            if (!empty($sendingresultjson["click"]))
-                $sessiondata["click"] = $sendingresultjson["click"];
-        
-            if (!empty($sendingresultjson["landingsscripts"]))
-                $sessiondata["landingsscripts"] = $sendingresultjson["landingsscripts"];
-        
-            if (!empty($sendingresultjson["citieslist"]))
-                $sessiondata["citieslist"] = $sendingresultjson["citieslist"];
-        
-    // Сохранение набора реквизитов 
-            if (!empty($sendingresultjson["advertisersrequisites"]))
-                $sessiondata["advertisersrequisites"] = $sendingresultjson["advertisersrequisites"];
-        }
-        $_SESSION['l'.$landings_id] = json_encode($sessiondata);
-    }
-    if (empty($_GET['city']) || empty($sessiondata["citieslist"][$_GET['city']])) {
-        include("/var/www/cpapartizan.ru/www/lib/SxGeo.php");
-        $SxGeo = new SxGeo('/var/www/cpapartizan.ru/www/lib/SxGeoCity.dat');
-        $SxGeoCity = $SxGeo->getCityFull($_SERVER['HTTP_X_REAL_IP']);
-        
-        foreach ($sessiondata["citieslist"] as $cityKey => $cityValue) {
-            if ($SxGeoCity["city"]["name_ru"] == $cityValue['case1']) {
-                $_GET['city'] = $cityKey;
-                break;
-            }
-        }
-    }
-    if (!empty($_GET['city']) && empty($sessiondata["citieslist"][$_GET['city']])) {
-        $_GET['city'] = '';
-    }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        require_once("/var/www/cpapartizan.ru/www/lib/Lead.php");
-        
-        $sessiondata["leadflag"] = true;
-    //	if(!empty($_POST["Lead"]["name"]) && !empty($_POST["Lead"]["phone"])) {
-    //    	$sessiondata["friend"] = array(
-    //        	"friend" => $_POST["Lead"]["name"],
-    //        	"friend_phone" => $_POST["Lead"]["phone"],
-    //        	"friend_offer" => empty($_POST["Lead"]["offer"])?null:$_POST["Lead"]["offer"],
-    //        	"friend_city" => empty($_POST["Lead"]["city"])?null:$_POST["Lead"]["city"],
-    //        	"friend_landing" => $landings_id,
-    //    	);
-    //	}
-        
-        $_SESSION['l'.$landings_id] = json_encode($sessiondata);
-        
-        header('Location: ' . $_SERVER['REQUEST_URI']);
-    }
-?>
--->
+
 <!doctype html>
 <html>
 <head>
@@ -93,69 +14,12 @@
 </script>
 <script src="js/vendor/vendor.min.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
-<title>Simple title</title>
-<!--
-<?php echo empty($sessiondata["click"])?'':'<script src="https://mosclubkrasota.ru/site/clicks/?click='.$sessiondata["click"].'"></script>'; ?>
-<?=empty($sessiondata["landingsscripts"]["inhead"])?'':$sessiondata["landingsscripts"]["inhead"]?>
--->
+<title>Цифровое агентство &laquo;Геркулес&raquo;</title>
+
 </head>
 
 <body>
 
-    <!-- Hidden inputs -->
-        <!--
-        <input type="hidden" name="Lead[offer]" value="bormental">
-        <input class="cityInput" value="<?=$_GET['city']?>" name="Lead[city]" type="hidden">
-        <?php echo empty($sessiondata["click"])?'':'<input type="hidden" name="Lead[click]" value="'.$sessiondata["click"].'" />'; ?>
-        <input type="hidden" name="Lead[landing_id]" value="<?php echo $landings_id; ?>">
-        <input type="hidden" name="Lead[sub1]" value="<?php echo isset($_GET['sub1']) ? $_GET['sub1'] : ''; ?>">
-        <input type="hidden" name="Lead[sub2]" value="<?php echo isset($_GET['sub2']) ? $_GET['sub2'] : ''; ?>">
-        <input type="hidden" name="Lead[sub3]" value="<?php echo isset($_GET['sub3']) ? $_GET['sub3'] : ''; ?>">
-        <input type="hidden" name="Lead[sub4]" value="<?php echo isset($_GET['sub4']) ? $_GET['sub4'] : ''; ?>">
-        <input type="hidden" name="Lead[sub5]" value="<?php echo isset($_GET['sub5']) ? $_GET['sub5'] : ''; ?>">
-        <input type="hidden" name="Lead[wmkey]" value="<?php echo isset($_GET['wmkey']) ? $_GET['wmkey'] : ''; ?>">
-        <input type="hidden" name="urlreturn" value="false">
-        -->
-
-    <!-- Visual inputs (grouped) -->
-        <!--
-        <div class="c-form__block">
-            <label for="name">Ваше имя</label>
-            <input class="c-input" id="name" type="text" name="Lead[name]" placeholder="Алевтина">
-        </div>
-
-        <div class="c-form__block">
-            <label for="phone">Ваш телефон</label>
-            <input class="c-input" id="phone" type="tel" name="Lead[phone]" placeholder="8 123 456 78 90">
-        </div>
-
-        <div class="c-form__block--grouped">
-            <div class="block__item">
-                <label for="height">Ваш рост</label>
-                <input class="c-input" id="height" type="number" name="Lead[height]" placeholder="см">
-            </div>
-
-            <div class="block__item">
-                <label for="weight">Ваш вес</label>
-                <input class="c-input" id="weight" type="number" name="Lead[weight]" placeholder="кг">
-            </div>
-
-            <div class="block__item">
-                <label for="age">Ваш возраст</label>
-                <input class="c-input" id="age" type="number" name="Lead[age]" <?=($_GET['age']?' value="'.$_GET['age'].'"':'')?> placeholder="лет">
-            </div>
-        </div>
-
-        <input class="c-btn" type="submit" value="ЗАПИСАТЬСЯ">
-        -->
-
-    <!-- Visual inputs (not-grouped) -->
-        <!--
-        <input class="c-input" type="text" name="Lead[name]" placeholder="Ваше имя">
-        <input class="c-input" type="text" name="Lead[phone]" placeholder="Ваше телефон">
-        <input class="c-input" type="text" name="Lead[age]"<?=($_GET['age']?' value="'.$_GET['age'].'"':'')?> placeholder="Ваше возраст">
-        <input type="submit" class="c-btn" value="ЗАПИСАТЬСЯ">
-        -->
 
     <header class="header" id="main">
         <div class="wrap">
@@ -174,7 +38,7 @@
                 </div>
             </div>
             <div class="header__content">
-                <h1>ВСЕ ГРАНИ<br> DIGITAL<br> МАРКЕТИНГА</h1>
+                <h1>СИЛА<br> DIGITAL<br> МАРКЕТИНГА</h1>
                 <a href="#" class="header__btn c-btn" data-modal="client">ПОЛУЧИТЬ КЛИЕНТОВ</a>
             </div>
         </div>
@@ -186,18 +50,15 @@
                 <h1 class="about__title">О НАС</h1>
                 <div class="about__text">
                     <p>
-                        Товарищи! консультация с широким активом в значительной степени
-                        обуславливает создание систем массового участия. Таким образом сложившаяся
-                        структура организации требуют от нас анализа существенных финансовых и
-                        административных условий. Не следует, однако забывать, что постоянное
-                        информационно- пропагандистское обеспечение нашей деятельности представляет
-                        собой интересный эксперимент проверки позиций, занимаемых участниками
-                        в отношении поставленных задач.
+                        <b>Цифровое агентство "Геркулес"</b> - мы используем всю силу и мощь
+                        digital маркетинга!
                     </p>
                     <p>
-                        Разнообразный и богатый опыт сложившаяся структура организации
-                        обеспечивает широкому кругу (специалистов) участие в формировании новых предложений. 
+                        <b>У нас есть</b> своя <b>специализация</b> - сайты медицинского и юридического
+                        направления. Используя их мы можем обеспечить Вам практически неиссякаемый
+                        поток клиентов. Мы знаем, а главное - хорошо умеем это делать.
                     </p>
+                    <p><b>В знании - наша сила!</b></p>
                 </div>
             </div>
         </div>
@@ -212,7 +73,7 @@
                 </div>
     
                 <div class="plates__item">
-                    <p class="item__text">Размещение статей/обзоров</p>
+                    <p class="item__text">Размещение статей и обзоров</p>
                 </div>
     
                 <div class="plates__item">
@@ -232,7 +93,7 @@
                 </div>
     
                 <div class="plates__item">
-                    <p class="item__text">Продвижением в соц сетях и привлечение подписчиков</p>
+                    <p class="item__text">Продвижение в соц сетях и привлечение подписчиков</p>
                 </div>
     
                 <div class="plates__item">
@@ -246,18 +107,57 @@
     <div class="cases" id="cases">
         <div class="wrap">
             <h1 class="cases__title">КЕЙСЫ</h1>
+
             <div class="cases__plates">
+
                 <div class="plates__item">
-                    <img src="img/case_1.png" alt="">
+                    <img src="img/case_1.jpg" alt="">
+
+                    <div class="item__content">
+                        <h2 class="item__title">Телемедицина</h2>
+                        <p class="item__text">
+                            <a class="c-link" href="https://telemedicina.one/">https://telemedicina.one/</a>
+                        </p>
+                        <p class="item__text">
+                            16 направлений в лечении заболеваний (список увеличивается).
+                            Полезные статьи и возможность получить консультацию врача онлайн
+                            или записаться на сайте.
+                        </p>
+                    </div>
                 </div>
     
                 <div class="plates__item">
-                    <img src="img/case_2.png" alt="">
+                    <img src="img/case_2.jpg" alt="">
+
+                    <div class="item__content">
+                        <h2 class="item__title">Кожные болезни</h2>
+                        <p class="item__text">
+                            <a href="https://doctoros.ru/" class="c-link">https://doctoros.ru/</a>
+                        </p>
+                        <p class="item__text">
+                            Статьи о профилактике и лечении множества кожных заболеваний.
+                            Возможно записаться на консультацию к специалисту или заказать
+                            необходимый препарат.
+                        </p>
+                    </div>
                 </div>
     
                 <div class="plates__item">
-                    <img src="img/case_3.png" alt="">
+                    <img src="img/case_3.jpg" alt="">
+
+                    <div class="item__content">
+                        <h2 class="item__title">Права потребителя</h2>
+                        <p class="item__text">
+                            <a href="https://pravapotrebitelya.ru/" class="c-link">https://pravapotrebitelya.ru/</a>
+                        </p>
+                        <p class="item__text">
+                            Полезные статьи о защите своих прав в различных ситуациях.
+                            В зависимости от проблемы возможность получить юридическую
+                            консультацию у специалистов.
+                        </p>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -271,15 +171,15 @@
                 </div>
     
                 <div class="plates__item">
-                    <img src="img/partner.png" alt="" class="item__img">
+                    <img src="img/partner_2.png" alt="" class="item__img">
                 </div>
     
                 <div class="plates__item">
-                    <img src="img/partner.png" alt="" class="item__img">
+                    <img src="img/partner_3.png" alt="" class="item__img">
                 </div>
     
                 <div class="plates__item">
-                    <img src="img/partner.png" alt="" class="item__img">
+                    <img src="img/partner_4.png" alt="" class="item__img">
                 </div>
             </div>
         </div>
@@ -290,13 +190,13 @@
             <div class="contacts__info">
                 <h1 class="contacts__title">КОНТАКТЫ</h1>
                 <div class="contacts__block">
-                    <a class="c-link" href="tel:+74991120777">+7 (499) 112-0-777</a>
-                    <a href="http://t.me/adamantmg" class="c-link">t.me/adamantmg</a>
-                    <a href="mailto:shtab@adamant.ru" class="c-link">shtab@adamant.ru</a>
+                    <a class="c-link" href="tel:+79998354743">+7 (999) 835-47-43</a>
+                    <a href="http://t.me/Hercules31337" class="c-link">t.me/Hercules31337</a>
+                    <a href="mailto:a.ilyin@hercules.su" class="c-link">a.ilyin@hercules.su</a>
                 </div>
             </div>
     
-            <form class="contacts__form c-form" action="" method="post" onsubmit="validateform(this); return false;">
+            <form class="contacts__form c-form" action="send2.php" method="post" onsubmit="">
                 <h2 class="c-form__title">
                     ЕСТЬ ВОПРОСЫ?
                     <span class="not-bold blue">МОЖЕТЕ ИХ ЗАДАТЬ СЕЙЧАС</span>
@@ -305,18 +205,18 @@
                 <!-- Visual inputs (grouped) -->
                 <div class="c-form__block">
                     <label for="name">Ваше имя</label>
-                    <input class="c-input" id="name" type="text" name="Lead[name]">
+                    <input class="c-input" id="name" type="text" name="name">
                 </div>
     
                 <div class="c-form__block">
                     <label for="phone">Ваш телефон</label>
-                    <input class="c-input" id="phone" type="tel" name="Lead[phone]">
+                    <input class="c-input" id="phone" type="tel" name="phone">
                 </div>
     
                 <div class="c-form__block--grouped">
                     <div class="block__item">
                         <label for="height">Ваше сообщение</label>
-                        <textarea class="c-input" id="height" type="text" name="Lead[message]" rows="3"></textarea>
+                        <textarea class="c-input" id="height" type="text" name="message" rows="3"></textarea>
                     </div>
                 </div>
     
@@ -326,86 +226,21 @@
     </div>
 
     <fotoer class="footer">
-        <!--<p>
-            
-            <?=empty($sessiondata["advertisersrequisites"])?'':((empty($_GET['city']) ||
-            empty($sessiondata["advertisersrequisites"][$_GET['city']]))?$sessiondata["advertisersrequisites"]
-            ['default']:$sessiondata["advertisersrequisites"][$_GET['city']])?>
-            
-        </p>-->
-        <a href="#" class="c-link">Политика конфиденциальности</a>
-        <a href="#" class="c-link">Пользовательское соглашение</a>
-        <a href="#" class="c-link">Согласие на обработку персональных данных</a>
+        <div class="wrap">
+            <div class="footer__req">
+                <p>ИП Ильин А.В.</p>
+                <p>ОГРНИП 317774600010790 от 17.01.2017</p>
+                <p>ИНН 770500852617</p>
+            </div>
+    
+            <div class="footer__links">
+                <a href="policy.php" class="c-link" target="_blank">Политика конфиденциальности</a> <br>
+                <a href="agreement.php" class="c-link" target="_blank">Пользовательское соглашение</a> <br>
+                <a href="personal.php" class="c-link" target="_blank">Согласие на&nbsp;обработку персональных данных</a> <br>
+            </div>
+        </div>
     </fotoer>
 
-    <!--
-    <script type="text/javascript">
-        function validateform(form)
-        {
-            var digits_reg = new RegExp("[^0-9]", "g");
-            form.elements["Lead[age]"].value = form.elements["Lead[age]"].value.replace(digits_reg, '');
-            if (form.elements["Lead[name]"].value == "") {
-                alert("Укажите Имя");
-                return false;
-            }
-            if (form.elements["Lead[name]"].value.length < 2) {
-                alert("Укажите Имя");
-                return false;
-            }
-        
-            if (form.elements["Lead[weight]"].value.length < 2){
-                alert("Укажите вес");
-                return false;
-            }
-    
-            if (form.elements["Lead[height]"].value == "") {
-                alert("Укажите Рост");
-                return false;
-            }
-            if (form.elements["Lead[phone]"].value == "") {
-                alert("Телефон не заполнен. Должен сождержать 10 цифр. Пример: 9123456789 или городской с кодом города 4951234567");
-                return false;
-            }
-            var phone_reg = new RegExp("[^0-9]", "g");
-            form.elements["Lead[phone]"].value = form.elements["Lead[phone]"].value.replace(phone_reg, '');
-            if (form.elements["Lead[phone]"].value.length < 10)
-            {
-                alert("Телефон не заполнен. Должен сождержать 10 цифр. Пример: 9123456789 или городской с кодом города 4951234567");
-                return false;
-            }
-            if (form.elements["Lead[phone]"].value.length > 11)
-            {
-                alert("Телефон не заполнен. Должен сождержать 10 цифр. Пример: 9123456789 или городской с кодом города 4951234567");
-                return false;
-            }
-            form.submit();
-        }
-    </script>
-
-    <?=empty($sessiondata["landingsscripts"]["inbody"])?'':$sessiondata["landingsscripts"]["inbody"]?>
-
-    <?php
-        if (($_SERVER['REQUEST_METHOD'] != 'POST') && isset($sessiondata["leadflag"])) {
-            unset($sessiondata["leadflag"]);
-            $_SESSION['l'.$landings_id] = json_encode($sessiondata);
-            
-            echo empty($sessiondata["landingsscripts"]["thankyoupage"])?'':$sessiondata["landingsscripts"]["thankyoupage"];
-            echo "<script>alert('Ваша заявка принята. Вскоре с вами свяжется оператор для уточнения деталей.');</script>";
-            
-            if (!empty($sessiondata["friend"])) {
-                $getparams = array_merge($_GET, $sessiondata["friend"]);
-                unset($sessiondata["friend"]);
-                $_SESSION['l'.$landings_id] = json_encode($sessiondata);
-            
-                if (!empty($_SERVER["HTTP_REFERER"])) {
-                    $getparams['refland'] = $_SERVER["HTTP_REFERER"];
-                }
-            
-                echo "<script>window.location.href=\"http://cpapartizan.ru/invitingtp/v1/".(empty($getparams) ? '' : '?'.http_build_query($getparams))."\";</script>";
-            }
-        } 
-    ?>
-    -->
-
+   
 </body>
 </html>

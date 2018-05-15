@@ -3,14 +3,23 @@
 // -----------------------------------------------------------------------------
 
 .footer {
-    @include flex(row, center, center);
+    @include flex(column, flex-start, center);
     flex-wrap: wrap;
     padding: rem(25px) 0;
     @include font-preset(rem(14px), 400, $black);
     text-align: center;
     background: $grey;
 
-    a {
-        margin: rem(5px) rem(42px);
+    .footer__req {
+        margin-bottom: rem(10px);
+    }
+
+    .footer__links {
+        @include flex(row, center, center);
+        flex-wrap: wrap;
+
+        .c-link {
+            margin: rem(10px) rem(30px);
+        }
     }
 }

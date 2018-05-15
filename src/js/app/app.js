@@ -44,12 +44,12 @@ $( document ).ready(function() {
                 name: `
                     <div class="c-form__block">
                         <label for="name">Ваше имя</label>
-                        <input class="c-input" id="name" type="text" name="Lead[name]">
+                        <input class="c-input" id="name" type="text" name="name">
                     </div>`,
                 tel: `
                     <div class="c-form__block">
                         <label for="phone">Ваш телефон</label>
-                        <input class="c-input" id="phone" type="tel" name="Lead[phone]">
+                        <input class="c-input" id="phone" type="tel" name="phone">
                     </div>`
             }
         }
@@ -62,7 +62,7 @@ $( document ).ready(function() {
                     <div class="c-modal__close">
                         <img src="img/close.svg">
                     </div>
-                    <form class="contacts__form c-form" action="" method="post" onsubmit="validateform(this); return false;">`
+                    <form class="contacts__form c-form" action="send.php" method="post" onsubmit="">`
 
             switch (type) {
                 case "client":
